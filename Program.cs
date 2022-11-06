@@ -1,36 +1,34 @@
-﻿// Напишите программу, которая найдет точку пересечения двух прямых,
-//заданных уравнениями н=k1*x + b1, y = k2*x+b2; значения b1, k1, b2 и k2 задаются пользователем.
-//b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0.5; +0.5).
+﻿// Пользователь вводит с клавиатуры М чисел.
+//Посчитайте, сколько чисеел больше 0 ввел ввел пользователь.
+// 0,7,8,-2, -> 2      1,7,567,89,223 -> 3
 
-void Across(double b1,double k1, double b2, double k2)
+int[] GetArrayFromString(string stringArray)
 {
-    if (k1 == k2 && b1 == b2)
+    string[] nums = stringArray.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+    int[] res = new int[nums.Length];
+    for (int i = 0; i < nums.Length; i++)
     {
-        Console.WriteLine($"Прямые совпадают");
+        res[i] = int.Parse(nums[i]);
     }
-    else if (k1 == k2)
-    {
-        Console.WriteLine($"Прямые параллельные");
-    }
-else
+    return res;
+}
+int CountPositive(int[] array)
 {
-    double x =  (b1 - b2) / (k2 - k1);
-    double y =  k2 * x + b2;
-    x = Math.Round(x, 2);
-    y = Math.Round(y, 2);
-    Console.WriteLine($"Пересечение в точке: ({x};{y})"); 
-} 
+    int count = 0;
+    foreach (int el in array)
+    {
+        if (el > 0) count++;
+    }
+    return count;
 }
 
 Console.Clear();
-Console.Write("Введите b1: ");
-double b1 = double.Parse(Console.ReadLine()!);
-Console.Write("Введите k1: ");
-double k1 = double.Parse(Console.ReadLine()!);
-Console.Write("Введите b2: ");
-double b2 = double.Parse(Console.ReadLine()!);
-Console.Write("Введите k2: ");
-double k2 = double.Parse(Console.ReadLine()!);
+Console.WriteLine("Введите числа через пробел: ");
+string input = Console.ReadLine()!;
+int[] numArray = GetArrayFromString(input);
+int count = CountPositive(numArray);
+Console.WriteLine($"Чисел больше нуля: {count}");
 
-Across(b1, k1, b2, k2);
+
+
 
